@@ -3,7 +3,7 @@
 import sys
 from os import urandom
 from sys import byteorder
-from brainfuck import evaluate
+import xor.bf.machine as bf
 
 nucleotide = list("+-><[].,")
 
@@ -54,7 +54,7 @@ def fit_generation(genes):
     fitness = []
     for gene in genes:
         try:
-            output = evaluate(gene,max_ticks = 10000)
+            output = bf.evaluate(gene,max_ticks = 10000)
             fit = fit_gene(output,"hi")
             fitness.append(fit)
         except Exception:
