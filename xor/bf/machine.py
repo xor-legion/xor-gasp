@@ -22,7 +22,7 @@ def evaluate(code,raw_input=None,max_ticks = None):
 
     input = None
     if raw_input is not None:
-        input = list(raw_input)
+        input = [ord(c) for c in list(raw_input)]
 
     input_idx = 0
     output_buf = []
@@ -88,6 +88,8 @@ def buildbracemap(code):
         if command == "[":
             temp_bracestack.append(position)
         if command == "]":
+            if len(temp_bracestack) == 0:
+                raise Exception("Bracemap: unmatched ]")
             start = temp_bracestack.pop()
             bracemap[start] = position
             bracemap[position] = start
